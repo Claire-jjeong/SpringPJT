@@ -27,7 +27,7 @@ public class BoardController {
 		list.add(vo);
 		list.add(vo);
 		list.add(vo);
-		//컨트롤러와 뷰를 연동시키려면 객체 바인딩 필요
+		//컨트롤러와 뷰를 연동시키려면 객체 바인딩 필요!
 		request.setAttribute("list",list);
 		//뷰의 논리적인 이름 --ViewResolver--> 뷰의 물리적인 이름(경로)
 		return "boardList"; //보여줄 뷰의 이름 써주기
