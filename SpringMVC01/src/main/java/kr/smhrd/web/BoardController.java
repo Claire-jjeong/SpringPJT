@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -14,13 +15,14 @@ import kr.board.mapper.BoardMapper;
 @Controller //전처리 하기 위한 표현
 public class BoardController {
 	
-	private BoardMapper mapper;
+	@Autowired //메모리에 생성된 객체를 자동으로 연결해줌 
+	private BoardMapper mapper; 
 
 	//1. 게시판 리스트를 보여달라는 요청을 받아서 DB에서 가져오는 일
 	//HandlerMapping
 	@RequestMapping("/boardList.do")
 	public String boardList(HttpServletRequest request) { //위 요청이 오면 메소드를 실행해라
-		//jsp로 보내기
+		//jsp로 보내기 
 		List<Board> list = mapper.boardList();//boardmapper의 boardList와 연결 -> mapper.xml의 sql문까지 연결
 		request.setAttribute("list", list);
 	

@@ -8,3 +8,9 @@ create table board(
 	count int default 0,
 	primary key(idx)
 );
+insert into board(title,contents,writer)
+values ('스프링게시판','스프링게시판','관리자');
+insert into board(title,contents,writer)
+values ('스프링게시판','스프링게시판','김정미');
+
+select * from board;
