@@ -4,6 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.board.mapper.BoardMapper">
    <select id = "boardList" resultType = "kr.board.domain.Board">
-   select * from board
+   select * from board order by idx desc
    </select>
 </mapper>
