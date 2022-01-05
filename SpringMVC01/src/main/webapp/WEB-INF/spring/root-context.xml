@@ -23,7 +23,7 @@
 		destroy-method="close">
 			<constructor-arg ref="hikariConfig"/>
 		</bean>
-		
+		 
 		<!-- mybatis-Spring API(연동)  -->
 		<bean class = "org.mybatis.spring.SqlSessionFactoryBean">
 			<!-- 히카리 데이터소스와 연결필요 -->
