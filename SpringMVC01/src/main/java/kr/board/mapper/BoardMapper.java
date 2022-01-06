@@ -14,4 +14,6 @@ public interface BoardMapper { //DB와 연동
 	//1. 접속기능(X)
 	//2. 게시판리스트 가져오는 기능
 	public List<Board> boardList(); //추상메서드 -> SQL(select~) 쿼리를 별도로 모아놓는 파일 -->mapper.xml 
+	public void boardInsert(Board vo); //SQL(insert~)
+	public Board boardContent(int idx); //SQL(select~ where idx=8)
 }

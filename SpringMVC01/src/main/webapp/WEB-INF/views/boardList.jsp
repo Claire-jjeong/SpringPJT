@@ -26,15 +26,22 @@
 				<td>작성일</td>
 				<td>조회수</td>
 			</tr>
-			<c:forEach var = "vo" items = "${list}"> <!-- list안에 있는걸 가져오겠 -->
+			<c:forEach var = "vo" items = "${list}"> <!-- list안에 있는걸 가져오겠다 -->
 			<tr>
 				<td>${vo.idx}</td>
-				<td>${vo.title}</td>
+				<td><a href="boardContent.do?idx=${vo.idx}">${vo.title}</a></td> <!-- 제목 클릭 시 boardContent(상세보기)기 -->
 				<td>${vo.writer}</td>
 				<td>${vo.indate}</td>
 				<td>${vo.count}</td>
 			</tr>
 			</c:forEach>
+			<!-- 글쓰기 -->
+			<tr>
+				<td colspan ="5">							<!-- 글쓰기 버튼 클릭 시 해당 경로로 이동 -->
+					<button class = "btn btn-primary btn-sm" onClick="location.href='boardInsertForm.do'">글쓰기</button>
+					
+				</td>
+			</tr>
 		</table>
 	</div>
 	<div class = "panel-footer">빅데이터 분석서비스 개발자과정 김정미</div>

@@ -3,7 +3,19 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.board.mapper.BoardMapper">
-   <select id = "boardList" resultType = "kr.board.domain.Board">
+   <select id = "boardList" resultType = "kr.board.domain.Board"> <!-- select의 결과를 묶어줘야 하기 때문에 resultType -->
    select * from board order by idx desc
    </select>
+   
+   <insert id = "boardInsert" parameterType="kr.board.domain.Board"> <!-- parameter 세팅 타입 : parameterType -->
+   insert into board(title,contents,writer)
+   values(#{title},#{contents},#{writer}) 
+   <!-- #{} : parameter --> 
+   </insert>
+   
+   <select id = "boardContent" 
+   			resultType = "kr.board.domain.Board" parameterType="int"> <!-- parameter 한 개일 경우 파라미터 타입 생략 가능 -->
+   select * from board where idx = #{idx}
+   </select>
+   
 </mapper>

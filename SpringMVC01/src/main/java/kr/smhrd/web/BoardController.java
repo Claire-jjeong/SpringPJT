@@ -31,4 +31,25 @@ public class BoardController {
 		return "boardList"; //보여줄 뷰의 이름 써주기
 	}
 	
+	@RequestMapping("/boardInsertForm.do")
+	public String boardInsertForm() { //String -> 뷰의 논리적인 이름 때문에
+		return "boardInsertForm";
+	
+	}
+	
+	//글쓰기 요청 처리
+	@RequestMapping("/boardInsert.do") //form의 parameter 3개가 넘어옴(title,contents,writer)
+	//스프링은 파라미터 수집을 자동으로 해줌 (vo와 이름이 동일하면 수집 됨)
+	public String boardInsert(Board vo) {
+		//mapper연동 
+		mapper.boardInsert(vo); //db에 저장
+		return "redirect:/boardList.do"; //다시 리스트 보기 요청페이지로 이동해야 함
+	}
+	//상세보기 페이지
+	@RequestMapping("/boardContent.do")
+	public String boardContent(int idx,Model model) { //board모두 받을 필요 없이 1개만 받을 경우 (프레임워크 내성) 
+		Board vo= mapper.boardContent(idx);
+		model.addAttribute("vo",vo);
+		return "boardContent";
+	}
 }

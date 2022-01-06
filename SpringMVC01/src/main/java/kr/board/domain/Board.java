@@ -9,6 +9,7 @@ public class Board {
 	private String writer; //작성자 
 	private String indate; //작성일 
 	private int count; //조회수
+	//디폴트 생성자가 만들어져있지 않기 때문에 Parameter수집 시 Controller에서 vo호출 시 에러 발생
 	public int getIdx() {
 		return idx;
 	}
@@ -45,4 +46,5 @@ public class Board {
 	public void setCount(int count) {
 		this.count = count;
 	}
+
 }
