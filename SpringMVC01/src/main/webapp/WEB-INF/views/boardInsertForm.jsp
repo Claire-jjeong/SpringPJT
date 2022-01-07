@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<c:set var="cpath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang ="en" >
 <head>
@@ -18,7 +19,7 @@
 	<div class = "panel panel-default">
 	<div class = "panel-heading">SPRING BOARD</div>
 	<div class = "panel-body">
-		<form class="form-horizontal" action="boardInsert.do" method = "post"> <!-- 글쓰기 클릭하면 boardInsert.do로 넘어가기 -->
+		<form class="form-horizontal" action="${cpath}/boardInsert.do" method = "post"> <!-- 글쓰기 클릭하면 boardInsert.do로 넘어가기 -->
 		  <div class="form-group">
 		    <label class="control-label col-sm-2" for="title">제목:</label>
 		    <div class="col-sm-10">								<!-- 서버로 전송하기 위해 Parameter이름, board 이름, 데이터베이스 이름과 동일하게 설정 -->

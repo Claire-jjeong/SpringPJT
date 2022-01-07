@@ -8,7 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.board.domain.Board;
 import kr.board.mapper.BoardMapper;
@@ -31,25 +34,45 @@ public class BoardController {
 		return "boardList"; //보여줄 뷰의 이름 써주기
 	}
 	
-	@RequestMapping("/boardInsertForm.do")
-	public String boardInsertForm() { //String -> 뷰의 논리적인 이름 때문에
+	@RequestMapping(value="/boardInsert.do",method = RequestMethod.GET) //get방식으로 넘어올 때
+	public String boardInsertGet() { //String -> 뷰의 논리적인 이름 때문에
 		return "boardInsertForm";
 	
 	}
 	
 	//글쓰기 요청 처리
-	@RequestMapping("/boardInsert.do") //form의 parameter 3개가 넘어옴(title,contents,writer)
+	@RequestMapping(value = "/boardInsert.do",method = RequestMethod.POST) //form의 parameter 3개가 넘어옴(title,contents,writer), post방식으로 넘어올 때
 	//스프링은 파라미터 수집을 자동으로 해줌 (vo와 이름이 동일하면 수집 됨)
-	public String boardInsert(Board vo) {
+	public String boardInsertPost(Board vo) {
 		//mapper연동 
 		mapper.boardInsert(vo); //db에 저장
 		return "redirect:/boardList.do"; //다시 리스트 보기 요청페이지로 이동해야 함
 	}
-	//상세보기 페이지
-	@RequestMapping("/boardContent.do")
-	public String boardContent(int idx,Model model) { //board모두 받을 필요 없이 1개만 받을 경우 (프레임워크 내성) 
+	//글 번호 받아와서 제목 클릭시 boardContent로 이동
+	@RequestMapping("/boardContent.do/{idx}") //받을 변수 지정
+	public String boardContent(@PathVariable("idx") int idx,Model model) { //board모두 받을 필요 없이 1개만 받을 경우 (프레임워크 내성) 
 		Board vo= mapper.boardContent(idx);
-		model.addAttribute("vo",vo);
+		model.addAttribute("vo",vo); //객체 바인딩 
 		return "boardContent";
+	}
+	//삭제 기능
+	@RequestMapping("/boardDelete.do")
+	public String boardDelete(@RequestParam("idx")int idx) { //@RequestParam : 변수 이름이 다를 때 넘어오는 파라미터 받아오는 경우 
+		mapper.boardDelete(idx);
+		return "redirect:/boardList.do";
+	}
+	
+	//수정 기능
+	@RequestMapping(value="/boardUpdate.do/{idx}",method=RequestMethod.GET)
+	public String boardUpdateGet(@PathVariable("idx") int idx, Model model) {
+		Board vo = mapper.boardContent(idx);
+		model.addAttribute("vo", vo);
+		return "boardUpdateForm"; //boardUpdateForm.jsp
+	}
+	@RequestMapping(value="/boardUpdate.do", method=RequestMethod.POST)
+	public String boardUpdatePost(Board vo) {
+		mapper.boardUpdate(vo);
+		return "redirect:/boardList.do";
+		
 	}
 }

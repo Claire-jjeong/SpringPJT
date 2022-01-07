@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<c:set var="cpath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +30,7 @@
 			<c:forEach var = "vo" items = "${list}"> <!-- list안에 있는걸 가져오겠다 -->
 			<tr>
 				<td>${vo.idx}</td>
-				<td><a href="boardContent.do?idx=${vo.idx}">${vo.title}</a></td> <!-- 제목 클릭 시 boardContent(상세보기)기 -->
+				<td><a href="${cpath}/boardContent.do/${vo.idx}">${vo.title}</a></td> <!-- 제목 클릭 시 boardContent(상세보기) -->
 				<td>${vo.writer}</td>
 				<td>${vo.indate}</td>
 				<td>${vo.count}</td>
@@ -38,7 +39,7 @@
 			<!-- 글쓰기 -->
 			<tr>
 				<td colspan ="5">							<!-- 글쓰기 버튼 클릭 시 해당 경로로 이동 -->
-					<button class = "btn btn-primary btn-sm" onClick="location.href='boardInsertForm.do'">글쓰기</button>
+					<button class = "btn btn-primary btn-sm" onClick="location.href='${cpath}/boardInsert.do'">글쓰기</button>
 					
 				</td>
 			</tr>
